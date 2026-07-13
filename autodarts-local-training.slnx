@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/AutodartsApiSimulator/">
+    <Project Path="AutodartsApiSimulator/autodarts-api-simulator.csproj" />
+  </Folder>
+  <Folder Name="/AutodartsLocalTraining/">
+    <Project Path="AutodartsLocalTraining/autodarts-local-training.csproj" />
+  </Folder>
+</Solution>
