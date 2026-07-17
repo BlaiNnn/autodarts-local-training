@@ -1,4 +1,4 @@
-namespace AutodartsLocalTraining.Views;
+namespace AutodartsLocalTraining.WinUI.Views;
 
 internal interface IEscapable
 {

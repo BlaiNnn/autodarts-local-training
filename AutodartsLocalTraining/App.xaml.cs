@@ -1,6 +1,6 @@
 using System.Windows;
 
-namespace AutodartsLocalTraining;
+namespace AutodartsLocalTraining.WinUI;
 
 public partial class App : Application
 {

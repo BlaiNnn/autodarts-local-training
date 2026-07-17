@@ -1,6 +1,5 @@
 using System.Windows;
-using System.Threading;
-using AutodartsApiSimulator;
+using AutodartsLocalTraining.BoardSimulator;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,4 +40,7 @@ uiThread.Join();
 
 await app.StopAsync();
 
-record ThrowRequest(int Number, int Multiplier);
+namespace AutodartsLocalTraining.BoardSimulator
+{
+    record ThrowRequest(int Number, int Multiplier);
+}

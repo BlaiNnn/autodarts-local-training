@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Resources;
 
-namespace AutodartsLocalTraining.Properties;
+namespace AutodartsLocalTraining.WinUI.Properties;
 
 /// <summary>
 /// Hand-written accessor over Resources.resx (dotnet build doesn't run the VS-only
@@ -12,7 +12,7 @@ namespace AutodartsLocalTraining.Properties;
 internal static class Resources
 {
     private static readonly ResourceManager ResourceManager =
-        new("AutodartsLocalTraining.Properties.Resources", typeof(Resources).Assembly);
+        new("AutodartsLocalTraining.WinUI.Properties.Resources", typeof(Resources).Assembly);
 
     public static string Connect_Title => Get();
     public static string Connect_BoardIpLabel => Get();

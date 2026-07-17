@@ -1,9 +1,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using AutodartsApiSimulator.Models;
+using AutodartsLocalTraining.BoardSimulator.Models;
 
-namespace AutodartsApiSimulator;
+namespace AutodartsLocalTraining.BoardSimulator;
 
 public partial class SimulatorWindow : Window
 {

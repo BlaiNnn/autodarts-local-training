@@ -1,4 +1,4 @@
-namespace AutodartsLocalTraining.Modes;
+namespace AutodartsLocalTraining;
 
 public readonly record struct DartThrow(int Number, int Multiplier)
 {

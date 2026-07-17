@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AutodartsApiSimulator.Models;
+namespace AutodartsLocalTraining.BoardSimulator.Models;
 
 public class SimState
 {

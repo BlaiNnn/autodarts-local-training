@@ -1,4 +1,6 @@
-namespace AutodartsLocalTraining.ViewModels;
+using AutodartsLocalTraining.ViewModels;
+
+namespace AutodartsLocalTraining.WinUI.ViewModels;
 
 public sealed class ProgramCardViewModel
 {

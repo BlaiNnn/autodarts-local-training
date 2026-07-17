@@ -2,43 +2,21 @@ using System.Net.Http;
 using System.Windows.Media;
 using AutodartsLocalTraining.Models;
 using AutodartsLocalTraining.Services;
+using AutodartsLocalTraining.ViewModels;
 
-namespace AutodartsLocalTraining.ViewModels;
+namespace AutodartsLocalTraining.WinUI.ViewModels;
 
 public class ConnectViewModel : ViewModelBase
 {
-    public string Ip
-    {
-        get;
-        set => SetField(ref field, value);
-    } = "";
+    public string Ip { get; set => SetField(ref field, value); } = "";
 
-    public string Port
-    {
-        get;
-        set => SetField(ref field, value);
-    } = "3180";
+    public string Port { get; set => SetField(ref field, value); } = "3180";
 
-    public string StatusMessage
-    {
-        get;
-        private set => SetField(ref field, value);
-    } = "";
+    public string StatusMessage { get; private set => SetField(ref field, value); } = "";
 
-    public Brush StatusBrush
-    {
-        get;
-        private set => SetField(ref field, value);
-    } = Brushes.Gray;
+    public Brush StatusBrush { get; private set => SetField(ref field, value); } = Brushes.Gray;
 
-    private bool IsConnecting
-    {
-        get;
-        set
-        {
-            if (SetField(ref field, value)) ConnectCommand.RaiseCanExecuteChanged();
-        }
-    }
+    private bool IsConnecting { get; set { if (SetField(ref field, value)) ConnectCommand.RaiseCanExecuteChanged(); } }
 
     public RelayCommand ConnectCommand { get; }
 

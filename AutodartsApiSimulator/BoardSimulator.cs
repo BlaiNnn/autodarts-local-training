@@ -1,6 +1,6 @@
-using AutodartsApiSimulator.Models;
+using AutodartsLocalTraining.BoardSimulator.Models;
 
-namespace AutodartsApiSimulator;
+namespace AutodartsLocalTraining.BoardSimulator;
 
 public class BoardSimulator
 {

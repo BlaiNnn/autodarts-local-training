@@ -4,10 +4,10 @@
     <TargetFramework>net10.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RootNamespace>AutodartsApiSimulator</RootNamespace>
-    <AssemblyName>autodarts-api-simulator</AssemblyName>
+    <RootNamespace>AutodartsLocalTraining.BoardSimulator</RootNamespace>
     <InvariantGlobalization>true</InvariantGlobalization>
     <UseWPF>true</UseWPF>
+    <PackageId>AutodartsLocalTraining.BoardSimulator</PackageId>
   </PropertyGroup>
 
 </Project>

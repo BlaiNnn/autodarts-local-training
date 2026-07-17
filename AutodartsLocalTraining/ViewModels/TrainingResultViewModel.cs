@@ -1,7 +1,8 @@
 using System.Windows.Media;
 using AutodartsLocalTraining.Services;
+using AutodartsLocalTraining.ViewModels;
 
-namespace AutodartsLocalTraining.ViewModels;
+namespace AutodartsLocalTraining.WinUI.ViewModels;
 
 public class TrainingResultViewModel : ViewModelBase
 {

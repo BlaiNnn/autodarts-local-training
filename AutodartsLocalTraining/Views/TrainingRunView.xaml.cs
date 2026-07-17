@@ -1,9 +1,9 @@
 using System.Windows.Controls;
 using AutodartsLocalTraining.Modes;
 using AutodartsLocalTraining.Services;
-using AutodartsLocalTraining.ViewModels;
+using AutodartsLocalTraining.WinUI.ViewModels;
 
-namespace AutodartsLocalTraining.Views;
+namespace AutodartsLocalTraining.WinUI.Views;
 
 public partial class TrainingRunView : UserControl, IEscapable, IDisposable
 {

@@ -1,4 +1,4 @@
-<Window x:Class="AutodartsApiSimulator.SimulatorWindow"
+<Window x:Class="AutodartsLocalTraining.BoardSimulator.SimulatorWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Autodarts Simulator Console"

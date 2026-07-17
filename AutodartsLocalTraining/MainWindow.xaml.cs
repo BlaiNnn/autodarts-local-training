@@ -2,10 +2,10 @@ using System.Windows;
 using System.Windows.Input;
 using AutodartsLocalTraining.Modes;
 using AutodartsLocalTraining.Services;
-using AutodartsLocalTraining.ViewModels;
-using AutodartsLocalTraining.Views;
+using AutodartsLocalTraining.WinUI.ViewModels;
+using AutodartsLocalTraining.WinUI.Views;
 
-namespace AutodartsLocalTraining;
+namespace AutodartsLocalTraining.WinUI;
 
 public partial class MainWindow : Window
 {

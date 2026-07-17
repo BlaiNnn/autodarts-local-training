@@ -1,8 +1,8 @@
 using System.Windows.Controls;
 using AutodartsLocalTraining.Services;
-using AutodartsLocalTraining.ViewModels;
+using AutodartsLocalTraining.WinUI.ViewModels;
 
-namespace AutodartsLocalTraining.Views;
+namespace AutodartsLocalTraining.WinUI.Views;
 
 public partial class TrainingResultView : UserControl, IEscapable
 {

@@ -6,8 +6,8 @@
     <UseWPF>true</UseWPF>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RootNamespace>AutodartsLocalTraining</RootNamespace>
-    <AssemblyName>autodarts-local-training</AssemblyName>
+    <RootNamespace>AutodartsLocalTraining.WinUI</RootNamespace>
+    <PackageId>AutodartsLocalTraining.WinUI</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

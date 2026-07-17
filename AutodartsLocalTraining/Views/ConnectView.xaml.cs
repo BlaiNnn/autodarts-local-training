@@ -1,9 +1,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using AutodartsLocalTraining.Services;
-using AutodartsLocalTraining.ViewModels;
+using AutodartsLocalTraining.WinUI.ViewModels;
 
-namespace AutodartsLocalTraining.Views;
+namespace AutodartsLocalTraining.WinUI.Views;
 
 public partial class ConnectView : UserControl, IEscapable
 {

@@ -4,8 +4,9 @@ using System.Windows.Threading;
 using AutodartsLocalTraining.Models;
 using AutodartsLocalTraining.Modes;
 using AutodartsLocalTraining.Services;
+using AutodartsLocalTraining.ViewModels;
 
-namespace AutodartsLocalTraining.ViewModels;
+namespace AutodartsLocalTraining.WinUI.ViewModels;
 
 public class TrainingRunViewModel : ViewModelBase, IDisposable
 {

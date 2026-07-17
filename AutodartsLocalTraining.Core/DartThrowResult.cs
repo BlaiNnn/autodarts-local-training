@@ -1,4 +1,4 @@
-namespace AutodartsLocalTraining.Modes;
+namespace AutodartsLocalTraining;
 
 public enum ThrowOutcome
 {

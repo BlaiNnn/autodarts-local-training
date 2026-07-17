@@ -1,7 +1,7 @@
 <Solution>
-  <Project Path="AutodartsApiSimulator/autodarts-api-simulator.csproj" />
-  <Project Path="AutodartsLocalTraining/autodarts-local-training.csproj" />
+  <Project Path="AutodartsApiSimulator/AutodartsLocalTraining.BoardSimulator.csproj" />
   <Project Path="AutodartsLocalTraining.Core/AutodartsLocalTraining.Core.csproj" />
   <Project Path="AutodartsLocalTraining.Modes/AutodartsLocalTraining.Modes.csproj" />
   <Project Path="AutodartsLocalTraining.Modes.Tests/AutodartsLocalTraining.Modes.Tests.csproj" />
+  <Project Path="AutodartsLocalTraining/AutodartsLocalTraining.WinUI.csproj" />
 </Solution>
