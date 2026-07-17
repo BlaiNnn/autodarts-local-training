@@ -2,14 +2,14 @@ using AutodartsLocalTraining.ViewModels;
 
 namespace AutodartsLocalTraining.WinUI.ViewModels;
 
-public sealed class ProgramCardViewModel
+public sealed class TrainingModeCardViewModel
 {
     public string Name { get; }
     public string RecordText { get; }
     public string RecordDateText { get; }
     public RelayCommand SelectCommand { get; }
 
-    public ProgramCardViewModel(string name, string recordText, string recordDateText, Action select)
+    public TrainingModeCardViewModel(string name, string recordText, string recordDateText, Action select)
     {
         Name = name;
         RecordText = recordText;

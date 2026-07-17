@@ -20,7 +20,7 @@ public class RoundTheBoardSingleFieldsTests
     {
         var mode = new RoundTheBoardSingleFields();
 
-        mode.ProcessThrows([new DartThrow(1, 1)]);
+        mode.ProcessThrow(new DartThrow(1, 1));
 
         mode.Score.Should().Be(1);
     }
@@ -33,7 +33,7 @@ public class RoundTheBoardSingleFieldsTests
     {
         var mode = new RoundTheBoardSingleFields();
 
-        mode.ProcessThrows([new DartThrow(number, multiplier)]);
+        mode.ProcessThrow(new DartThrow(number, multiplier));
 
         mode.Score.Should().Be(0);
     }
@@ -43,7 +43,9 @@ public class RoundTheBoardSingleFieldsTests
     {
         var mode = new RoundTheBoardSingleFields();
 
-        var turnCompleted = mode.ProcessThrows([new DartThrow(1, 1), new DartThrow(1, 3), new DartThrow(5, 1)]);
+        mode.ProcessThrow(new DartThrow(1, 1));
+        mode.ProcessThrow(new DartThrow(1, 3));
+        var turnCompleted = mode.ProcessThrow(new DartThrow(5, 1));
 
         turnCompleted.Should().BeTrue();
         mode.PrimaryDisplayValue.Should().Be("1");
@@ -51,12 +53,14 @@ public class RoundTheBoardSingleFieldsTests
     }
 
     [Fact]
-    public void ProcessThrows_NoOpsWhileTurnPendingAdvance()
+    public void ProcessThrow_NoOpsWhileTurnPendingAdvance()
     {
         var mode = new RoundTheBoardSingleFields();
-        mode.ProcessThrows([new DartThrow(1, 1), new DartThrow(1, 1), new DartThrow(1, 1)]);
+        mode.ProcessThrow(new DartThrow(1, 1));
+        mode.ProcessThrow(new DartThrow(1, 1));
+        mode.ProcessThrow(new DartThrow(1, 1));
 
-        var turnCompleted = mode.ProcessThrows([new DartThrow(1, 1), new DartThrow(1, 1), new DartThrow(1, 1), new DartThrow(1, 1)]);
+        var turnCompleted = mode.ProcessThrow(new DartThrow(1, 1));
 
         turnCompleted.Should().BeFalse();
         mode.Score.Should().Be(3);
@@ -66,7 +70,9 @@ public class RoundTheBoardSingleFieldsTests
     public void AdvanceToNextTurn_ClearsThrowsAndAdvancesTarget()
     {
         var mode = new RoundTheBoardSingleFields();
-        mode.ProcessThrows([new DartThrow(1, 1), new DartThrow(1, 1), new DartThrow(1, 1)]);
+        mode.ProcessThrow(new DartThrow(1, 1));
+        mode.ProcessThrow(new DartThrow(1, 1));
+        mode.ProcessThrow(new DartThrow(1, 1));
 
         mode.AdvanceToNextTurn();
 
@@ -93,7 +99,9 @@ public class RoundTheBoardSingleFieldsTests
 
         for (var target = 1; target <= 20; target++)
         {
-            var turnCompleted = mode.ProcessThrows([new DartThrow(target, 1), new DartThrow(target, 1), new DartThrow(target, 1)]);
+            mode.ProcessThrow(new DartThrow(target, 1));
+            mode.ProcessThrow(new DartThrow(target, 1));
+            var turnCompleted = mode.ProcessThrow(new DartThrow(target, 1));
             turnCompleted.Should().BeTrue();
             mode.AdvanceToNextTurn();
         }
@@ -103,33 +111,19 @@ public class RoundTheBoardSingleFieldsTests
     }
 
     [Fact]
-    public void ProcessThrows_NoOpsOnceComplete()
+    public void ProcessThrow_NoOpsOnceComplete()
     {
         var mode = new RoundTheBoardSingleFields();
         for (var target = 1; target <= 20; target++)
         {
-            mode.ProcessThrows([new DartThrow(target, 1), new DartThrow(target, 1), new DartThrow(target, 1)]);
+            mode.ProcessThrow(new DartThrow(target, 1));
+            mode.ProcessThrow(new DartThrow(target, 1));
+            mode.ProcessThrow(new DartThrow(target, 1));
             mode.AdvanceToNextTurn();
         }
 
-        mode.ProcessThrows([new DartThrow(1, 1)]);
+        mode.ProcessThrow(new DartThrow(1, 1));
 
         mode.Score.Should().Be(60);
-    }
-
-    [Fact]
-    public void BoardResetMidTurn_ResyncsDisplayedThrows()
-    {
-        var mode = new RoundTheBoardSingleFields();
-        mode.ProcessThrows([new DartThrow(1, 1), new DartThrow(1, 1)]);
-        mode.Score.Should().Be(2);
-
-        // Board reports a shorter throws array than previously seen (e.g. darts removed / turn reset).
-        // The displayed throw list resyncs to the shorter list; darts replayed from index 0 are re-scored
-        // (a pre-existing characteristic of this reset-detection approach, not something this change alters).
-        mode.ProcessThrows([new DartThrow(1, 1)]);
-
-        mode.Score.Should().Be(3);
-        mode.CurrentTurnThrows.Should().ContainSingle();
     }
 }

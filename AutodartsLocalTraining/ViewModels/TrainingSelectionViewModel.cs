@@ -10,12 +10,12 @@ public class TrainingSelectionViewModel : ViewModelBase
 
     public AutodartsClient Client => _client;
     public string ConnectionText { get; }
-    public IReadOnlyList<ProgramCardViewModel> Programs { get; }
+    public IReadOnlyList<TrainingModeCardViewModel> TrainingModes { get; }
 
     public RelayCommand DisconnectCommand { get; }
     public RelayCommand QuitCommand { get; }
 
-    public event EventHandler<TrainingMode>? ProgramSelected;
+    public event EventHandler<TrainingMode>? TrainingModeSelected;
     public event EventHandler? Disconnected;
     public event EventHandler? QuitRequested;
 
@@ -23,24 +23,24 @@ public class TrainingSelectionViewModel : ViewModelBase
     {
         _client = client;
         ConnectionText = $"{client.Ip}:{client.Port}";
-        Programs = typeof(TrainingMode).GetEnumValues().OfType<TrainingMode>().Select(BuildCard).ToList();
+        TrainingModes = typeof(TrainingMode).GetEnumValues().OfType<TrainingMode>().Select(BuildCard).ToList();
         DisconnectCommand = new RelayCommand(Disconnect);
         QuitCommand = new RelayCommand(Quit);
     }
 
-    private ProgramCardViewModel BuildCard(TrainingMode program)
+    private TrainingModeCardViewModel BuildCard(TrainingMode trainingMode)
     {
-        var mode = program;
-        var history = ScoreHistoryService.LoadHistory(mode.ToString());
+        var history = ScoreHistoryService.LoadHistory(trainingMode.ToString());
         var best = history.Count > 0
             ? history.OrderByDescending(entry => entry.Score).ThenByDescending(entry => entry.Date).First()
             : null;
-        var maxScore = TrainingModeFactory.Create(mode).MaxScore;
+        var maxScore = TrainingModeFactory.Create(trainingMode).MaxScore;
 
         var recordText = best is null ? "No record yet" : $"Best: {best.Score} / {maxScore}";
         var recordDateText = best is null ? "" : $"on {best.Date.ToLocalTime():g}";
+        var caption = Properties.Resources.TrainingModeCaption(trainingMode.ToString());
 
-        return new ProgramCardViewModel(nameof(program), recordText, recordDateText, () => ProgramSelected?.Invoke(this, program));
+        return new TrainingModeCardViewModel(caption, recordText, recordDateText, () => TrainingModeSelected?.Invoke(this, trainingMode));
     }
 
     private void Disconnect()

@@ -6,7 +6,6 @@ public sealed class RoundTheBoardSingleFields : ITrainingMode
     private const int LastNumber = 20;
 
     private readonly List<DartThrowResult> _turnThrows = new();
-    private int _apiThrowsSeenCount;
     private int _currentTargetNumber = FirstNumber;
     private bool _turnJustCompleted;
 
@@ -20,32 +19,18 @@ public sealed class RoundTheBoardSingleFields : ITrainingMode
 
     public bool IsComplete { get; private set; }
 
-    public bool ProcessThrows(IReadOnlyList<DartThrow> throws)
+    public bool ProcessThrow(DartThrow dart)
     {
         if (IsComplete || _turnJustCompleted) return false;
 
-        if (throws.Count < _apiThrowsSeenCount)
-        {
-            _turnThrows.Clear();
-            _apiThrowsSeenCount = 0;
-        }
+        var isHit = dart.Number == _currentTargetNumber && dart.Multiplier == 1;
+        if (isHit) Score++;
 
-        for (var i = _apiThrowsSeenCount; i < throws.Count; i++)
-        {
-            var dart = throws[i];
-            var isHit = dart.Number == _currentTargetNumber && dart.Multiplier == 1;
-            if (isHit) Score++;
+        _turnThrows.Add(new DartThrowResult(FormatName(dart), isHit ? ThrowOutcome.Good : ThrowOutcome.Bad));
 
-            _turnThrows.Add(new DartThrowResult(FormatName(dart), isHit ? ThrowOutcome.Good : ThrowOutcome.Bad));
+        if (_turnThrows.Count >= 3)
+            _turnJustCompleted = true;
 
-            if (_turnThrows.Count >= 3)
-            {
-                _turnJustCompleted = true;
-                break;
-            }
-        }
-
-        _apiThrowsSeenCount = throws.Count;
         return _turnJustCompleted;
     }
 
@@ -54,7 +39,6 @@ public sealed class RoundTheBoardSingleFields : ITrainingMode
         if (!_turnJustCompleted) return;
 
         _turnThrows.Clear();
-        _apiThrowsSeenCount = 0;
         _turnJustCompleted = false;
 
         if (_currentTargetNumber >= LastNumber)

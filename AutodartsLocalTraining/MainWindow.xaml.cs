@@ -38,15 +38,15 @@ public partial class MainWindow : Window
     private void ShowSelection(AutodartsClient client)
     {
         var view = new TrainingSelectionView(client);
-        view.ProgramSelected += (_, program) => ShowRun(client, program);
+        view.TrainingModeSelected += (_, trainingMode) => ShowRun(client, trainingMode);
         view.Disconnected += (_, _) => ShowConnect();
         view.QuitRequested += (_, _) => Application.Current.Shutdown();
         SetContent(view);
     }
 
-    private void ShowRun(AutodartsClient client, TrainingMode program)
+    private void ShowRun(AutodartsClient client, TrainingMode trainingMode)
     {
-        var view = new TrainingRunView(client, program);
+        var view = new TrainingRunView(client, trainingMode);
         view.Abandoned += (_, _) => ShowSelection(client);
         view.Completed += (_, e) => ShowResult(client, e);
         SetContent(view);

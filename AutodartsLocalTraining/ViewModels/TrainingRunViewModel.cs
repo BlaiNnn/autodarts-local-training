@@ -18,15 +18,9 @@ public class TrainingRunViewModel : ViewModelBase, IDisposable
     private readonly DispatcherTimer _timer;
     private readonly DispatcherTimer _holdTimer;
     private readonly ITrainingMode _session;
-    private readonly TrainingMode _mode;
+    private readonly TrainingMode _trainingMode;
     private bool _isPolling;
-
-    // The board only clears its reported throws once a new dart lands after a completed turn - it has
-    // no concept of our targets or training sessions. Until that clear is observed, throws already on
-    // the board belong to a prior turn/session and must not be replayed against the new target.
-    private bool _needsLegBaseline = true;
-    private int _staleLegThrowBaseline;
-    private int _lastRawThrowCount;
+    private int _processedThrowCount;
 
     public string TrainingName { get; }
 
@@ -71,22 +65,30 @@ public class TrainingRunViewModel : ViewModelBase, IDisposable
     public event EventHandler? Abandoned;
     public event EventHandler<TrainingCompletedEventArgs>? Completed;
 
-    public TrainingRunViewModel(AutodartsClient client, TrainingMode program)
+    public TrainingRunViewModel(AutodartsClient client, TrainingMode trainingMode)
     {
         _client = client;
-        TrainingName = nameof(program);
-        _mode = program;
-        _session = TrainingModeFactory.Create(_mode);
+        TrainingName = Properties.Resources.TrainingModeCaption(trainingMode.ToString());
+        _trainingMode = trainingMode;
+        _session = TrainingModeFactory.Create(_trainingMode);
         AbandonCommand = new RelayCommand(Abandon);
 
         RenderSession();
 
         _timer = new DispatcherTimer { Interval = OnlineInterval };
         _timer.Tick += Timer_Tick;
-        _timer.Start();
 
         _holdTimer = new DispatcherTimer { Interval = HoldInterval };
         _holdTimer.Tick += HoldTimer_Tick;
+
+        _ = StartAsync();
+    }
+
+    private async Task StartAsync()
+    {
+        // Reset before the first poll so a leg from a prior session isn't replayed against this one's target.
+        await ResetBoardAsync();
+        _timer.Start();
     }
 
     private async void Timer_Tick(object? sender, EventArgs e)
@@ -102,19 +104,15 @@ public class TrainingRunViewModel : ViewModelBase, IDisposable
             UpdateBoardStatus(state.Status);
             _timer.Interval = OnlineInterval;
 
-            var rawThrowCount = state.Throws.Count;
-            _lastRawThrowCount = rawThrowCount;
-
-            if (_needsLegBaseline)
+            var throws = MapThrows(state.Throws);
+            for (var i = _processedThrowCount; i < throws.Count; i++)
             {
-                _staleLegThrowBaseline = rawThrowCount;
-                _needsLegBaseline = false;
-            }
-            else if (_staleLegThrowBaseline == 0 || rawThrowCount < _staleLegThrowBaseline)
-            {
-                _staleLegThrowBaseline = 0;
-                var turnCompleted = _session.ProcessThrows(MapThrows(state.Throws));
-                if (turnCompleted) StartHold();
+                _processedThrowCount = i + 1;
+                if (_session.ProcessThrow(throws[i]))
+                {
+                    StartHold();
+                    break;
+                }
             }
 
             RenderSession();
@@ -138,22 +136,37 @@ public class TrainingRunViewModel : ViewModelBase, IDisposable
         _holdTimer.Start();
     }
 
-    private void HoldTimer_Tick(object? sender, EventArgs e)
+    private async void HoldTimer_Tick(object? sender, EventArgs e)
     {
         _holdTimer.Stop();
-        _staleLegThrowBaseline = _lastRawThrowCount;
         _session.AdvanceToNextTurn();
         RenderSession();
+
+        // Processed throws are only rebased to zero once the reset is confirmed sent, so a poll
+        // landing mid-reset still sees the old count and does not replay stale darts against the new target.
+        await ResetBoardAsync();
+        _processedThrowCount = 0;
 
         if (_session.IsComplete)
             CompleteTraining();
     }
 
+    private async Task ResetBoardAsync()
+    {
+        try
+        {
+            await _client.ResetBoardAsync();
+        }
+        catch (Exception ex) when (ex is HttpRequestException or TaskCanceledException)
+        {
+        }
+    }
+
     private void CompleteTraining()
     {
-        var priorHistory = ScoreHistoryService.LoadHistory(_mode.ToString());
+        var priorHistory = ScoreHistoryService.LoadHistory(_trainingMode.ToString());
         double? priorAverage = priorHistory.Count > 0 ? priorHistory.Average(entry => entry.Score) : null;
-        ScoreHistoryService.AppendResult(_mode.ToString(), _session.Score);
+        ScoreHistoryService.AppendResult(_trainingMode.ToString(), _session.Score);
 
         Completed?.Invoke(this, new TrainingCompletedEventArgs(TrainingName, _session.Score, _session.MaxScore, priorAverage));
     }

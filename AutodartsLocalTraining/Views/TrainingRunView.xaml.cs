@@ -12,12 +12,12 @@ public partial class TrainingRunView : UserControl, IEscapable, IDisposable
     public event EventHandler? Abandoned;
     public event EventHandler<TrainingCompletedEventArgs>? Completed;
 
-    public TrainingRunView(AutodartsClient client, TrainingMode program)
+    public TrainingRunView(AutodartsClient client, TrainingMode trainingMode)
     {
         InitializeComponent();
         AbandonButton.Content = Properties.Resources.Run_AbandonButton;
 
-        _viewModel = new TrainingRunViewModel(client, program);
+        _viewModel = new TrainingRunViewModel(client, trainingMode);
         _viewModel.Abandoned += (_, _) => Abandoned?.Invoke(this, EventArgs.Empty);
         _viewModel.Completed += (_, e) => Completed?.Invoke(this, e);
         DataContext = _viewModel;

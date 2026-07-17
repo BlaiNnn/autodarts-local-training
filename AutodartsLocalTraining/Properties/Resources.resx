@@ -110,6 +110,13 @@
     <value>on {0}</value>
   </data>
 
+  <data name="RoundTheBoardSingleFields" xml:space="preserve">
+    <value>Round the Board (Singles)</value>
+  </data>
+  <data name="ThreeDartCheckout" xml:space="preserve">
+    <value>Three Dart Checkout</value>
+  </data>
+
   <data name="Run_AbandonButton" xml:space="preserve">
     <value>Abandon training</value>
   </data>

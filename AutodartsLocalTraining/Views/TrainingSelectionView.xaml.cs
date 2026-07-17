@@ -9,7 +9,7 @@ public partial class TrainingSelectionView : UserControl, IEscapable
 {
     private readonly TrainingSelectionViewModel _viewModel;
 
-    public event EventHandler<TrainingMode>? ProgramSelected;
+    public event EventHandler<TrainingMode>? TrainingModeSelected;
     public event EventHandler? Disconnected;
     public event EventHandler? QuitRequested;
 
@@ -21,7 +21,7 @@ public partial class TrainingSelectionView : UserControl, IEscapable
         TitleText.Text = Properties.Resources.Selection_Title;
 
         _viewModel = new TrainingSelectionViewModel(client);
-        _viewModel.ProgramSelected += (_, program) => ProgramSelected?.Invoke(this, program);
+        _viewModel.TrainingModeSelected += (_, trainingMode) => TrainingModeSelected?.Invoke(this, trainingMode);
         _viewModel.Disconnected += (_, _) => Disconnected?.Invoke(this, EventArgs.Empty);
         _viewModel.QuitRequested += (_, _) => QuitRequested?.Invoke(this, EventArgs.Empty);
         DataContext = _viewModel;

@@ -44,6 +44,9 @@ internal static class Resources
     public static string Result_TrendDown => Get();
     public static string Result_TrendEqual => Get();
 
+    /// <summary>Looks up a training mode's display caption using the <see cref="Modes.TrainingMode"/> enum name as the resx key.</summary>
+    public static string TrainingModeCaption(string trainingModeName) => Get(trainingModeName);
+
     private static string Get([System.Runtime.CompilerServices.CallerMemberName] string name = "")
         => ResourceManager.GetString(name, CultureInfo.CurrentUICulture) ?? name;
 }

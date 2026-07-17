@@ -20,7 +20,7 @@ public class ThreeDartCheckoutTests
     {
         var mode = new ThreeDartCheckout();
 
-        var turnCompleted = mode.ProcessThrows([new DartThrow(5, 3)]); // T5 = 15, leftover 3 -> -12
+        var turnCompleted = mode.ProcessThrow(new DartThrow(5, 3)); // T5 = 15, leftover 3 -> -12
 
         turnCompleted.Should().BeTrue();
         mode.Score.Should().Be(0);
@@ -33,7 +33,7 @@ public class ThreeDartCheckoutTests
     {
         var mode = new ThreeDartCheckout();
 
-        var turnCompleted = mode.ProcessThrows([new DartThrow(2, 1)]); // S2 = 2, leftover 3 -> 1
+        var turnCompleted = mode.ProcessThrow(new DartThrow(2, 1)); // S2 = 2, leftover 3 -> 1
 
         turnCompleted.Should().BeTrue();
         mode.Score.Should().Be(0);
@@ -44,7 +44,7 @@ public class ThreeDartCheckoutTests
     {
         var mode = new ThreeDartCheckout();
 
-        var turnCompleted = mode.ProcessThrows([new DartThrow(1, 3)]); // T1 = 3, leftover 3 -> 0 but not a double
+        var turnCompleted = mode.ProcessThrow(new DartThrow(1, 3)); // T1 = 3, leftover 3 -> 0 but not a double
 
         turnCompleted.Should().BeTrue();
         mode.Score.Should().Be(0);
@@ -52,13 +52,15 @@ public class ThreeDartCheckoutTests
     }
 
     [Fact]
-    public void ExtraDartsInSameBatch_AreIgnoredAfterABust()
+    public void ProcessThrow_NoOpsWhileTurnPendingAdvance()
     {
         var mode = new ThreeDartCheckout();
 
-        // First dart busts (T5=15 > leftover 3); the remaining two must not be evaluated.
-        mode.ProcessThrows([new DartThrow(5, 3), new DartThrow(20, 2), new DartThrow(20, 2)]);
+        // First dart busts (T5=15 > leftover 3); a second dart in the same turn must not be evaluated.
+        mode.ProcessThrow(new DartThrow(5, 3));
+        var turnCompleted = mode.ProcessThrow(new DartThrow(20, 2));
 
+        turnCompleted.Should().BeFalse();
         mode.CurrentTurnThrows.Should().ContainSingle();
         mode.Score.Should().Be(0);
     }
@@ -67,10 +69,11 @@ public class ThreeDartCheckoutTests
     public void Checkout_OnSecondDart_Scores2Points()
     {
         var mode = new ThreeDartCheckout(); // leftover starts at 3; advance to 5 first
-        mode.ProcessThrows([new DartThrow(1, 3)]); // busts leftover 3 (reaches 0 non-double)
+        mode.ProcessThrow(new DartThrow(1, 3)); // busts leftover 3 (reaches 0 non-double)
         mode.AdvanceToNextTurn(); // now targeting leftover 5
 
-        var turnCompleted = mode.ProcessThrows([new DartThrow(1, 1), new DartThrow(2, 2)]); // S1 -> remaining 4, D2 -> remaining 0
+        mode.ProcessThrow(new DartThrow(1, 1)); // S1 -> remaining 4
+        var turnCompleted = mode.ProcessThrow(new DartThrow(2, 2)); // D2 -> remaining 0
 
         turnCompleted.Should().BeTrue();
         mode.Score.Should().Be(2);
@@ -81,13 +84,14 @@ public class ThreeDartCheckoutTests
     public void Checkout_OnThirdDart_Scores1Point()
     {
         var mode = new ThreeDartCheckout();
-        mode.ProcessThrows([new DartThrow(1, 3)]); // busts leftover 3 (reaches 0 non-double)
+        mode.ProcessThrow(new DartThrow(1, 3)); // busts leftover 3 (reaches 0 non-double)
         mode.AdvanceToNextTurn(); // leftover 5
-        mode.ProcessThrows([new DartThrow(5, 3)]); // T5 = 15, busts leftover 5 (goes negative)
+        mode.ProcessThrow(new DartThrow(5, 3)); // T5 = 15, busts leftover 5 (goes negative)
         mode.AdvanceToNextTurn(); // leftover 7
 
-        var turnCompleted = mode.ProcessThrows([new DartThrow(3, 1), new DartThrow(2, 1), new DartThrow(1, 2)]);
-        // S3 -> remaining 4 (neutral), S2 -> remaining 2 (neutral), D1 -> remaining 0 (checkout)
+        mode.ProcessThrow(new DartThrow(3, 1)); // S3 -> remaining 4 (neutral)
+        mode.ProcessThrow(new DartThrow(2, 1)); // S2 -> remaining 2 (neutral)
+        var turnCompleted = mode.ProcessThrow(new DartThrow(1, 2)); // D1 -> remaining 0 (checkout)
 
         turnCompleted.Should().BeTrue();
         mode.Score.Should().Be(1);
@@ -98,17 +102,17 @@ public class ThreeDartCheckoutTests
     public void NoCheckoutAfterThreeDarts_ScoresZero_AndAdvanceResetsLeftoverToNextTarget()
     {
         var mode = new ThreeDartCheckout();
-        mode.ProcessThrows([new DartThrow(1, 3)]); // leftover 3 -> bust
+        mode.ProcessThrow(new DartThrow(1, 3)); // leftover 3 -> bust
         mode.AdvanceToNextTurn(); // leftover 5
 
-        var stillPlaying = mode.ProcessThrows([new DartThrow(1, 1), new DartThrow(1, 1)]); // remaining 4, then 3 (neutral)
+        mode.ProcessThrow(new DartThrow(1, 1)); // remaining 4 (neutral)
+        var stillPlaying = mode.ProcessThrow(new DartThrow(1, 1)); // remaining 3 (neutral)
         mode.AdvanceToNextTurn(); // turn never resolved (only 2 darts); advance is a no-op
 
         stillPlaying.Should().BeFalse();
         mode.PrimaryDisplayValue.Should().Be("3"); // live leftover reflects progress so far, no-op confirmed
 
-        // Board reports the full cumulative throws list for the turn, not just the newest dart.
-        var turnCompleted = mode.ProcessThrows([new DartThrow(1, 1), new DartThrow(1, 1), new DartThrow(1, 1)]); // remaining 2, 3rd dart, no bust/checkout -> 0 points
+        var turnCompleted = mode.ProcessThrow(new DartThrow(1, 1)); // remaining 2, 3rd dart, no bust/checkout -> 0 points
         turnCompleted.Should().BeTrue();
         mode.Score.Should().Be(0);
 
@@ -122,7 +126,7 @@ public class ThreeDartCheckoutTests
     {
         var mode = new ThreeDartCheckout();
 
-        var turnCompleted = mode.ProcessThrows([new DartThrow(25, 2)]); // double bull = 50, leftover starts at 3 (max target is 41)
+        var turnCompleted = mode.ProcessThrow(new DartThrow(25, 2)); // double bull = 50, leftover starts at 3 (max target is 41)
 
         turnCompleted.Should().BeTrue();
         mode.Score.Should().Be(0);
@@ -138,19 +142,6 @@ public class ThreeDartCheckoutTests
     }
 
     [Fact]
-    public void ProcessThrows_NoOpsWhileTurnPendingAdvance()
-    {
-        var mode = new ThreeDartCheckout();
-        mode.ProcessThrows([new DartThrow(1, 3)]); // busts
-
-        var turnCompleted = mode.ProcessThrows([new DartThrow(2, 2)]); // should be ignored
-
-        turnCompleted.Should().BeFalse();
-        mode.CurrentTurnThrows.Should().ContainSingle();
-        mode.Score.Should().Be(0);
-    }
-
-    [Fact]
     public void FullRun_AlwaysBusting_CompletesAfter20TargetsWithZeroScore()
     {
         var mode = new ThreeDartCheckout();
@@ -159,7 +150,7 @@ public class ThreeDartCheckoutTests
         for (var target = 3; target <= 41; target += 2)
         {
             mode.IsComplete.Should().BeFalse();
-            var turnCompleted = mode.ProcessThrows([new DartThrow(20, 3)]); // T20 = 60, always exceeds any target here -> bust
+            var turnCompleted = mode.ProcessThrow(new DartThrow(20, 3)); // T20 = 60, always exceeds any target here -> bust
             turnCompleted.Should().BeTrue();
             mode.AdvanceToNextTurn();
             turnsPlayed++;

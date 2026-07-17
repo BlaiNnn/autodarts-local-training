@@ -18,9 +18,13 @@ public class AutodartsClient : IDisposable
     }
 
     private string StateUrl => $"http://{Ip}:{Port}/api/state";
+    private string ResetUrl => $"http://{Ip}:{Port}/api/reset";
 
     public async Task<AutodartsState?> GetStateAsync(CancellationToken ct = default)
         => await _http.GetFromJsonAsync<AutodartsState>(StateUrl, ct);
+
+    public async Task ResetBoardAsync(CancellationToken ct = default)
+        => await _http.PostAsync(ResetUrl, null, ct);
 
     public void Dispose() => _http.Dispose();
 }

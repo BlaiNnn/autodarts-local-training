@@ -30,7 +30,7 @@ public class TrainingModeFactoryTests
 
         first.Should().NotBeSameAs(second);
 
-        first.ProcessThrows([new DartThrow(1, 1)]);
+        first.ProcessThrow(new DartThrow(1, 1));
 
         first.Score.Should().Be(1);
         second.Score.Should().Be(0);
