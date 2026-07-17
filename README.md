@@ -9,3 +9,5 @@ Train your darts skills with training plans using Autodarts.io in your local env
 - add extension methods for throw formatting
 - remove enum "TrainingMode", just for implementations of ITrainingMode
 - German translation
+- CI pipeline
+- Add release
