@@ -1,8 +1,7 @@
 <Solution>
-  <Folder Name="/AutodartsApiSimulator/">
-    <Project Path="AutodartsApiSimulator/autodarts-api-simulator.csproj" />
-  </Folder>
-  <Folder Name="/AutodartsLocalTraining/">
-    <Project Path="AutodartsLocalTraining/autodarts-local-training.csproj" />
-  </Folder>
+  <Project Path="AutodartsApiSimulator/autodarts-api-simulator.csproj" />
+  <Project Path="AutodartsLocalTraining/autodarts-local-training.csproj" />
+  <Project Path="AutodartsLocalTraining.Core/AutodartsLocalTraining.Core.csproj" />
+  <Project Path="AutodartsLocalTraining.Modes/AutodartsLocalTraining.Modes.csproj" />
+  <Project Path="AutodartsLocalTraining.Modes.Tests/AutodartsLocalTraining.Modes.Tests.csproj" />
 </Solution>

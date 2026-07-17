@@ -8,8 +8,8 @@ public partial class App : Application
     {
         base.OnStartup(e);
 
-        var connectWindow = new ConnectWindow();
-        MainWindow = connectWindow;
-        connectWindow.Show();
+        var mainWindow = new MainWindow();
+        MainWindow = mainWindow;
+        mainWindow.Show();
     }
 }

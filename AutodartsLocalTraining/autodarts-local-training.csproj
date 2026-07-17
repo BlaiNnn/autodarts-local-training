@@ -11,9 +11,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="TrainingPrograms\*.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <ProjectReference Include="..\AutodartsLocalTraining.Core\AutodartsLocalTraining.Core.csproj" />
+    <ProjectReference Include="..\AutodartsLocalTraining.Modes\AutodartsLocalTraining.Modes.csproj" />
   </ItemGroup>
+
 
 </Project>

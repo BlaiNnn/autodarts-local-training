@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="Connect_Title" xml:space="preserve">
+    <value>Connect to Autodarts Board</value>
+  </data>
+  <data name="Connect_BoardIpLabel" xml:space="preserve">
+    <value>Board IP</value>
+  </data>
+  <data name="Connect_PortLabel" xml:space="preserve">
+    <value>Port</value>
+  </data>
+  <data name="Connect_ConnectButton" xml:space="preserve">
+    <value>Connect</value>
+  </data>
+  <data name="Connect_BoardIpRequired" xml:space="preserve">
+    <value>Board IP is required.</value>
+  </data>
+  <data name="Connect_Connecting" xml:space="preserve">
+    <value>Connecting...</value>
+  </data>
+  <data name="Connect_Reconnecting" xml:space="preserve">
+    <value>Reconnecting to {0}:{1}...</value>
+  </data>
+  <data name="Connect_CouldNotReachSaved" xml:space="preserve">
+    <value>Could not reach saved board. Check IP/Port and connect manually.</value>
+  </data>
+  <data name="Connect_CouldNotReachManual" xml:space="preserve">
+    <value>Could not reach board. Check IP/Port and try again.</value>
+  </data>
+  <data name="Connect_UnexpectedResponse" xml:space="preserve">
+    <value>Unexpected response from board.</value>
+  </data>
+
+  <data name="Common_Disconnect" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
+  <data name="Common_Quit" xml:space="preserve">
+    <value>Quit</value>
+  </data>
+
+  <data name="Selection_Title" xml:space="preserve">
+    <value>Training Programs</value>
+  </data>
+  <data name="Selection_NoRecordYet" xml:space="preserve">
+    <value>No record yet</value>
+  </data>
+  <data name="Selection_BestScoreFormat" xml:space="preserve">
+    <value>Best: {0} / {1}</value>
+  </data>
+  <data name="Selection_RecordDateFormat" xml:space="preserve">
+    <value>on {0}</value>
+  </data>
+
+  <data name="Run_AbandonButton" xml:space="preserve">
+    <value>Abandon training</value>
+  </data>
+  <data name="Run_Offline" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="Run_ConnectionLost" xml:space="preserve">
+    <value>connection lost</value>
+  </data>
+  <data name="Run_TrainingComplete" xml:space="preserve">
+    <value>Training complete! Final score: {0} / {1}</value>
+  </data>
+
+  <data name="Result_ContinueButton" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="Result_NoHistoryYet" xml:space="preserve">
+    <value>No history yet</value>
+  </data>
+  <data name="Result_TrendUp" xml:space="preserve">
+    <value>&#9650; vs. average {0:F1}</value>
+  </data>
+  <data name="Result_TrendDown" xml:space="preserve">
+    <value>&#9660; vs. average {0:F1}</value>
+  </data>
+  <data name="Result_TrendEqual" xml:space="preserve">
+    <value>= average {0:F1}</value>
+  </data>
+</root>

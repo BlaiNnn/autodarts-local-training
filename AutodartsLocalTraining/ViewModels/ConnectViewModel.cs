@@ -7,23 +7,36 @@ namespace AutodartsLocalTraining.ViewModels;
 
 public class ConnectViewModel : ViewModelBase
 {
-    private string _ip = "";
-    private string _port = "3180";
-    private string _statusMessage = "";
-    private Brush _statusBrush = Brushes.Gray;
-    private bool _isConnecting;
+    public string Ip
+    {
+        get;
+        set => SetField(ref field, value);
+    } = "";
 
-    public string Ip { get => _ip; set => SetField(ref _ip, value); }
-    public string Port { get => _port; set => SetField(ref _port, value); }
-    public string StatusMessage { get => _statusMessage; private set => SetField(ref _statusMessage, value); }
-    public Brush StatusBrush { get => _statusBrush; private set => SetField(ref _statusBrush, value); }
+    public string Port
+    {
+        get;
+        set => SetField(ref field, value);
+    } = "3180";
+
+    public string StatusMessage
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "";
+
+    public Brush StatusBrush
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = Brushes.Gray;
 
     private bool IsConnecting
     {
-        get => _isConnecting;
+        get;
         set
         {
-            if (SetField(ref _isConnecting, value)) ConnectCommand.RaiseCanExecuteChanged();
+            if (SetField(ref field, value)) ConnectCommand.RaiseCanExecuteChanged();
         }
     }
 
@@ -55,12 +68,14 @@ public class ConnectViewModel : ViewModelBase
 
         if (string.IsNullOrEmpty(ip))
         {
-            SetStatus("Board IP is required.", isError: true);
+            SetStatus(Properties.Resources.Connect_BoardIpRequired, isError: true);
             return;
         }
 
         IsConnecting = true;
-        SetStatus(isAutoConnect ? $"Reconnecting to {ip}:{port}..." : "Connecting...", isError: false);
+        SetStatus(isAutoConnect
+            ? string.Format(Properties.Resources.Connect_Reconnecting, ip, port)
+            : Properties.Resources.Connect_Connecting, isError: false);
 
         var client = new AutodartsClient(ip, port);
         try
@@ -75,14 +90,14 @@ public class ConnectViewModel : ViewModelBase
         {
             client.Dispose();
             SetStatus(isAutoConnect
-                ? "Could not reach saved board. Check IP/Port and connect manually."
-                : "Could not reach board. Check IP/Port and try again.", isError: true);
+                ? Properties.Resources.Connect_CouldNotReachSaved
+                : Properties.Resources.Connect_CouldNotReachManual, isError: true);
             IsConnecting = false;
         }
         catch (Exception)
         {
             client.Dispose();
-            SetStatus("Unexpected response from board.", isError: true);
+            SetStatus(Properties.Resources.Connect_UnexpectedResponse, isError: true);
             IsConnecting = false;
         }
     }

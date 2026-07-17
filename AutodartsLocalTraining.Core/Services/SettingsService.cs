@@ -27,7 +27,7 @@ public static class SettingsService
             // Ignore corrupt or unreadable settings and fall back to defaults.
         }
 
-        return new ConnectionSettings();
+        return new ConnectionSettings { Ip = "", Port = "3180" };
     }
 
     public static void Save(ConnectionSettings settings)

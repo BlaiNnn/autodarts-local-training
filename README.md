@@ -1,4 +1,9 @@
 # autodarts-local-training
 Train your darts skills with training plans using Autodarts.io in your local environment
 
-This project is in a very early state
+## TODO
+- More modes
+- Make statistics available for user
+- nicer UI
+- Fix: Leg reset on next iteration
+- Fix: ThreeDartCheckout -> add more number 
