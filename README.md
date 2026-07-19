@@ -9,8 +9,6 @@ Train your darts skills with training plans using Autodarts.io in your local env
 - Feature: Add multi user option?
 - GitHub: Add release pipeline
 - GitHub: Add branch protection
-- Bugfix: Throws outside of board should be mapped correctly
-- Bugfix: fix Takeout status handling
 - Bugfix: disconnect should disable auto connect
 - Refactor: add extension methods for throw formatting
 - Refactor: move autodarts status handling to core project
