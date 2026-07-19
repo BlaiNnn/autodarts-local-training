@@ -15,3 +15,4 @@ Train your darts skills with training plans using Autodarts.io in your local env
 - Refactor: add extension methods for throw formatting
 - Refactor: move autodarts status handling to core project
 - Refactor: remove enum "TrainingMode", list implementations that inherit ITrainingMode instead
+- Refactor: rename project folder to match project names
