@@ -43,6 +43,10 @@ public class ConsoleCommandService(BoardSimulator simulator) : BackgroundService
                 Print(simulator.Reset());
                 break;
 
+            case "takeout":
+                Print(simulator.StartTakeout());
+                break;
+
             case "state":
                 Print(simulator.GetState());
                 break;
@@ -148,6 +152,7 @@ public class ConsoleCommandService(BoardSimulator simulator) : BackgroundService
         Console.WriteLine("  throw <segment>   e.g. throw T20, throw D16, throw 5, throw bull, throw 25, throw miss");
         Console.WriteLine("  random            throw a random segment");
         Console.WriteLine("  reset             clear the current turn");
+        Console.WriteLine("  takeout           trigger takeout state for 3 seconds");
         Console.WriteLine("  state             print the current state");
         Console.WriteLine("  help              show this help");
         Console.WriteLine();

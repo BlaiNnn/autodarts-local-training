@@ -20,6 +20,8 @@ app.MapPost("/api/random", (BoardSimulator sim) => Results.Json(sim.AddRandomThr
 
 app.MapPost("/api/reset", (BoardSimulator sim) => Results.Json(sim.Reset()));
 
+app.MapPost("/api/takeout", (BoardSimulator sim) => Results.Json(sim.StartTakeout()));
+
 Console.WriteLine($"Autodarts API simulator listening on {urls}");
 Console.WriteLine("POST /api/throw {number, multiplier} to throw a specific segment.");
 Console.WriteLine("POST /api/random to throw a random segment.");

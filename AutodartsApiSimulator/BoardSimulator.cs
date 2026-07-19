@@ -4,10 +4,13 @@ namespace AutodartsLocalTraining.BoardSimulator;
 
 public class BoardSimulator
 {
+    private static readonly TimeSpan TakeoutDuration = TimeSpan.FromSeconds(3);
+
     private readonly object _lock = new();
     private readonly Random _random = new();
     private readonly List<SimSegment> _throws = new();
     private string _status = "Waiting";
+    private Timer? _takeoutTimer;
 
     public SimState GetState()
     {
@@ -26,6 +29,7 @@ public class BoardSimulator
     {
         lock (_lock)
         {
+            CancelTakeoutUnlocked();
             if (_throws.Count >= 3) _throws.Clear();
             _throws.Add(BuildSegment(number, multiplier));
             _status = "Throw";
@@ -43,10 +47,39 @@ public class BoardSimulator
     {
         lock (_lock)
         {
+            CancelTakeoutUnlocked();
             _throws.Clear();
             _status = "Waiting";
             return GetStateUnlocked();
         }
+    }
+
+    public SimState StartTakeout()
+    {
+        lock (_lock)
+        {
+            CancelTakeoutUnlocked();
+            _status = "Takeout";
+            _takeoutTimer = new Timer(_ => EndTakeout(), null, TakeoutDuration, Timeout.InfiniteTimeSpan);
+            return GetStateUnlocked();
+        }
+    }
+
+    private void EndTakeout()
+    {
+        lock (_lock)
+        {
+            if (_status != "Takeout") return;
+            CancelTakeoutUnlocked();
+            _throws.Clear();
+            _status = "Waiting";
+        }
+    }
+
+    private void CancelTakeoutUnlocked()
+    {
+        _takeoutTimer?.Dispose();
+        _takeoutTimer = null;
     }
 
     public bool IsTurnComplete()

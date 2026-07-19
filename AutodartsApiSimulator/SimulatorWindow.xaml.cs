@@ -46,6 +46,7 @@ public partial class SimulatorWindow : Window
     private void Miss_Click(object sender, RoutedEventArgs e) => Throw(0, 0);
     private void Random_Click(object sender, RoutedEventArgs e) => RenderState(_simulator.AddRandomThrow());
     private void Reset_Click(object sender, RoutedEventArgs e) => RenderState(_simulator.Reset());
+    private void Takeout_Click(object sender, RoutedEventArgs e) => RenderState(_simulator.StartTakeout());
 
     private void Throw(int number, int multiplier) => RenderState(_simulator.AddThrow(number, multiplier));
 

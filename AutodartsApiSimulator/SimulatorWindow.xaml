@@ -45,7 +45,8 @@
 
         <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
             <Button Content="Random throw" Padding="10,4" Margin="0,0,6,0" Click="Random_Click"/>
-            <Button Content="Reset turn" Padding="10,4" Click="Reset_Click"/>
+            <Button Content="Reset turn" Padding="10,4" Margin="0,0,6,0" Click="Reset_Click"/>
+            <Button Content="Takeout" Padding="10,4" Click="Takeout_Click"/>
         </StackPanel>
 
         <TextBlock x:Name="StatusText" FontSize="16" Margin="0,0,0,8"/>
