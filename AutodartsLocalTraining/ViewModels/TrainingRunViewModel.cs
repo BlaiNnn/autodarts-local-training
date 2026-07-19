@@ -12,15 +12,15 @@ public class TrainingRunViewModel : ViewModelBase, IDisposable
 {
     private static readonly TimeSpan OnlineInterval = TimeSpan.FromSeconds(1);
     private static readonly TimeSpan OfflineInterval = TimeSpan.FromSeconds(5);
-    private static readonly TimeSpan HoldInterval = TimeSpan.FromSeconds(1);
 
     private readonly AutodartsClient _client;
     private readonly DispatcherTimer _timer;
-    private readonly DispatcherTimer _holdTimer;
     private readonly ITrainingMode _session;
     private readonly TrainingMode _trainingMode;
     private bool _isPolling;
     private int _processedThrowCount;
+    private bool _awaitingRealTakeout;
+    private bool _sawTakeoutStatus;
 
     public string TrainingName { get; }
 
@@ -78,9 +78,6 @@ public class TrainingRunViewModel : ViewModelBase, IDisposable
         _timer = new DispatcherTimer { Interval = OnlineInterval };
         _timer.Tick += Timer_Tick;
 
-        _holdTimer = new DispatcherTimer { Interval = HoldInterval };
-        _holdTimer.Tick += HoldTimer_Tick;
-
         _ = StartAsync();
     }
 
@@ -104,18 +101,44 @@ public class TrainingRunViewModel : ViewModelBase, IDisposable
             UpdateBoardStatus(state.Status);
             _timer.Interval = OnlineInterval;
 
-            var throws = MapThrows(state.Throws);
-            for (var i = _processedThrowCount; i < throws.Count; i++)
+            if (_awaitingRealTakeout)
             {
-                _processedThrowCount = i + 1;
-                if (_session.ProcessThrow(throws[i]))
+                // noticed that Autodarts has now really shifted to the takeout routine
+                if (state.Status.Contains("Takeout", StringComparison.OrdinalIgnoreCase))
+                    _sawTakeoutStatus = true;
+
+                // Only when Autodarts itself reports “Throw” again AND the throw list
+                // is truly empty is the removal physically confirmed -> only then proceed
+                if (_sawTakeoutStatus
+                    && string.Equals(state.Status, "Throw", StringComparison.OrdinalIgnoreCase)
+                    && state.Throws.Count == 0)
                 {
-                    StartHold();
-                    break;
+                    _awaitingRealTakeout = false;
+                    _sawTakeoutStatus = false;
+                    _processedThrowCount = 0;
+
+                    _session.AdvanceToNextTurn();
+                    RenderSession();
+
+                    if (_session.IsComplete)
+                        CompleteTraining();
                 }
             }
+            else
+            {
+                var throws = MapThrows(state.Throws);
+                for (var i = _processedThrowCount; i < throws.Count; i++)
+                {
+                    _processedThrowCount = i + 1;
+                    if (_session.ProcessThrow(throws[i]))
+                    {
+                        _awaitingRealTakeout = true;
+                        break;
+                    }
+                }
 
-            RenderSession();
+                RenderSession();
+            }
         }
         catch (Exception ex) when (ex is HttpRequestException or TaskCanceledException)
         {
@@ -128,29 +151,7 @@ public class TrainingRunViewModel : ViewModelBase, IDisposable
             _isPolling = false;
         }
     }
-
-    private void StartHold()
-    {
-        if (_holdTimer.IsEnabled) return;
-
-        _holdTimer.Start();
-    }
-
-    private async void HoldTimer_Tick(object? sender, EventArgs e)
-    {
-        _holdTimer.Stop();
-        _session.AdvanceToNextTurn();
-        RenderSession();
-
-        // Processed throws are only rebased to zero once the reset is confirmed sent, so a poll
-        // landing mid-reset still sees the old count and does not replay stale darts against the new target.
-        await ResetBoardAsync();
-        _processedThrowCount = 0;
-
-        if (_session.IsComplete)
-            CompleteTraining();
-    }
-
+    
     private async Task ResetBoardAsync()
     {
         try
@@ -168,7 +169,8 @@ public class TrainingRunViewModel : ViewModelBase, IDisposable
         double? priorAverage = priorHistory.Count > 0 ? priorHistory.Average(entry => entry.Score) : null;
         ScoreHistoryService.AppendResult(_trainingMode.ToString(), _session.Score);
 
-        Completed?.Invoke(this, new TrainingCompletedEventArgs(TrainingName, _session.Score, _session.MaxScore, priorAverage));
+        Completed?.Invoke(this,
+            new TrainingCompletedEventArgs(TrainingName, _session.Score, _session.MaxScore, priorAverage));
     }
 
     private static IReadOnlyList<DartThrow> MapThrows(IReadOnlyList<ThrowInfo> throws)
@@ -231,7 +233,6 @@ public class TrainingRunViewModel : ViewModelBase, IDisposable
     public void Dispose()
     {
         _timer.Stop();
-        _holdTimer.Stop();
     }
 }
 
