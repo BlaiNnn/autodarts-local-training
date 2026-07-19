@@ -47,10 +47,11 @@ public sealed class RoundTheBoardSingleFields : ITrainingMode
             _currentTargetNumber++;
     }
 
-    private static string FormatName(DartThrow dart) => dart.Multiplier switch
+    private static string FormatName(DartThrow dart) => dart switch
     {
-        2 => $"D{dart.Number}",
-        3 => $"T{dart.Number}",
+        { Number: 0 } => "Miss",
+        { Multiplier: 2 } => $"D{dart.Number}",
+        { Multiplier: 3 } => $"T{dart.Number}",
         _ => dart.Number.ToString()
     };
 }

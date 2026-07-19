@@ -117,8 +117,11 @@ public class TrainingRunViewModel : ViewModelBase, IDisposable
 
             RenderSession();
         }
-        catch (Exception ex) when (ex is HttpRequestException or TaskCanceledException)
+        catch (Exception)
         {
+            // Any polling failure (connection lost, empty body, malformed JSON from the board,
+            // e.g. around a status transition like Takeout) must not crash the app - just mark
+            // offline and keep retrying, or the whole session would need a manual restart.
             UpdateBoardStatus(Properties.Resources.Run_Offline);
             _timer.Interval = OfflineInterval;
             StatusText = Properties.Resources.Run_ConnectionLost;

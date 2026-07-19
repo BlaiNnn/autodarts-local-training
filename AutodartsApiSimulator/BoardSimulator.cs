@@ -118,6 +118,7 @@ public class BoardSimulator
     {
         var name = (number, multiplier) switch
         {
+            (0, _) => "Miss",
             (25, 2) => "Bull",
             (25, _) => "25",
             (_, 3) => $"T{number}",

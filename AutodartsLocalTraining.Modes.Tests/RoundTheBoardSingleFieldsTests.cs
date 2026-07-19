@@ -111,6 +111,18 @@ public class RoundTheBoardSingleFieldsTests
     }
 
     [Fact]
+    public void Miss_IsDisplayedAsMiss_NotAsZero()
+    {
+        var mode = new RoundTheBoardSingleFields();
+
+        mode.ProcessThrow(new DartThrow(0, 0));
+
+        mode.Score.Should().Be(0);
+        mode.CurrentTurnThrows.Should().ContainSingle()
+            .Which.Should().BeEquivalentTo(new { DisplayText = "Miss", Outcome = ThrowOutcome.Bad });
+    }
+
+    [Fact]
     public void ProcessThrow_NoOpsOnceComplete()
     {
         var mode = new RoundTheBoardSingleFields();

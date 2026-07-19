@@ -134,6 +134,19 @@ public class ThreeDartCheckoutTests
     }
 
     [Fact]
+    public void Miss_IsDisplayedAsMiss_NotAsZero_AndLeavesLeftoverUnchanged()
+    {
+        var mode = new ThreeDartCheckout();
+
+        var turnCompleted = mode.ProcessThrow(new DartThrow(0, 0));
+
+        turnCompleted.Should().BeFalse();
+        mode.PrimaryDisplayValue.Should().Be("3");
+        mode.CurrentTurnThrows.Should().ContainSingle()
+            .Which.DisplayText.Should().Be("Miss");
+    }
+
+    [Fact]
     public void DartValue_ComputesNumberTimesMultiplier()
     {
         new DartThrow(25, 2).Value.Should().Be(50);
