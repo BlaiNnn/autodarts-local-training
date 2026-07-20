@@ -101,6 +101,36 @@ public class TrainingRunViewModel : ViewModelBase, IDisposable
             UpdateBoardStatus(state.Status);
             _timer.Interval = OnlineInterval;
 
+            var throws = MapThrows(state.Throws);
+
+            // Autodarts only resets its own throw counter once a takeout has been
+            // physically confirmed. A drop in the throw count below what we already
+            // processed is therefore proof enough that the takeout happened - even if
+            // we never managed to poll an explicit "Takeout" status in between (a fast
+            // takeout, or an undetected bounce-out where Autodarts skips "Takeout" and
+            // jumps straight to "Takeout in progress").
+            if (throws.Count < _processedThrowCount)
+            {
+                while (!_session.IsComplete && !_awaitingRealTakeout)
+                {
+                    if (_session.ProcessThrow(new DartThrow(0, 0)))
+                        _awaitingRealTakeout = true;
+                }
+
+                AdvanceToNextTurnAndReset();
+                RenderSession();
+
+                if (_session.IsComplete)
+                {
+                    CompleteTraining();
+                    return;
+                }
+            }
+            
+            // The throw-count check above now catches most turn transitions already,
+            // including the fast-takeout case this block was originally written for.
+            // Kept as a fallback in case the throw count doesn't drop as expected
+            // (e.g. Autodarts reporting an unchanged count while still mid-takeout).
             if (_awaitingRealTakeout)
             {
                 // noticed that Autodarts has now really shifted to the takeout routine
@@ -113,11 +143,7 @@ public class TrainingRunViewModel : ViewModelBase, IDisposable
                     && string.Equals(state.Status, "Throw", StringComparison.OrdinalIgnoreCase)
                     && state.Throws.Count == 0)
                 {
-                    _awaitingRealTakeout = false;
-                    _sawTakeoutStatus = false;
-                    _processedThrowCount = 0;
-
-                    _session.AdvanceToNextTurn();
+                    AdvanceToNextTurnAndReset();
                     RenderSession();
 
                     if (_session.IsComplete)
@@ -126,15 +152,17 @@ public class TrainingRunViewModel : ViewModelBase, IDisposable
             }
             else
             {
-                var throws = MapThrows(state.Throws);
-                for (var i = _processedThrowCount; i < throws.Count; i++)
+                ProcessThrowsForCurrentTurn(throws);
+
+                // Autodarts can move straight to Takeout after fewer than 3 registered throws
+                // (e.g. a bounce-out it failed to detect at all). Treat any missing darts of
+                // this turn as misses so the turn completes instead of waiting forever for a
+                // throw that Autodarts will never report.
+                while (!_awaitingRealTakeout && state.Status.Contains("Takeout", StringComparison.OrdinalIgnoreCase))
                 {
-                    _processedThrowCount = i + 1;
-                    if (_session.ProcessThrow(throws[i]))
-                    {
+                    _processedThrowCount++;
+                    if (_session.ProcessThrow(new DartThrow(0, 0)))
                         _awaitingRealTakeout = true;
-                        break;
-                    }
                 }
 
                 RenderSession();
@@ -151,7 +179,28 @@ public class TrainingRunViewModel : ViewModelBase, IDisposable
             _isPolling = false;
         }
     }
-    
+
+    private void ProcessThrowsForCurrentTurn(IReadOnlyList<DartThrow> throws)
+    {
+        for (var i = _processedThrowCount; i < throws.Count; i++)
+        {
+            _processedThrowCount = i + 1;
+            if (_session.ProcessThrow(throws[i]))
+            {
+                _awaitingRealTakeout = true;
+                return;
+            }
+        }
+    }
+
+    private void AdvanceToNextTurnAndReset()
+    {
+        _awaitingRealTakeout = false;
+        _sawTakeoutStatus = false;
+        _processedThrowCount = 0;
+        _session.AdvanceToNextTurn();
+    }
+
     private async Task ResetBoardAsync()
     {
         try
