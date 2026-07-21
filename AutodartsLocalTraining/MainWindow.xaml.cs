@@ -28,9 +28,9 @@ public partial class MainWindow : Window
         MainContentHost.Content = view;
     }
 
-    private void ShowConnect()
+    private void ShowConnect(bool suppressAutoConnect = false)
     {
-        var view = new ConnectView();
+        var view = new ConnectView(suppressAutoConnect);
         view.Connected += (_, client) => ShowSelection(client);
         SetContent(view);
     }
@@ -39,7 +39,7 @@ public partial class MainWindow : Window
     {
         var view = new TrainingSelectionView(client);
         view.TrainingModeSelected += (_, trainingMode) => ShowRun(client, trainingMode);
-        view.Disconnected += (_, _) => ShowConnect();
+        view.Disconnected += (_, _) => ShowConnect(suppressAutoConnect: true);
         view.QuitRequested += (_, _) => Application.Current.Shutdown();
         SetContent(view);
     }

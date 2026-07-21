@@ -11,7 +11,7 @@ public partial class ConnectView : UserControl, IEscapable
 
     public event EventHandler<AutodartsClient>? Connected;
 
-    public ConnectView()
+    public ConnectView(bool suppressAutoConnect = false)
     {
         InitializeComponent();
         TitleText.Text = Properties.Resources.Connect_Title;
@@ -21,7 +21,9 @@ public partial class ConnectView : UserControl, IEscapable
 
         DataContext = _viewModel;
         _viewModel.Connected += (_, client) => Connected?.Invoke(this, client);
-        Loaded += async (_, _) => await _viewModel.AutoConnectIfConfiguredAsync();
+
+        if (!suppressAutoConnect)
+            Loaded += async (_, _) => await _viewModel.AutoConnectIfConfiguredAsync();
     }
 
     public void HandleEscape() => Application.Current.Shutdown();
