@@ -26,7 +26,7 @@ public sealed class RoundTheBoardSingleFields : ITrainingMode
         var isHit = dart.Number == _currentTargetNumber && dart.Multiplier == 1;
         if (isHit) Score++;
 
-        _turnThrows.Add(new DartThrowResult(FormatName(dart), isHit ? ThrowOutcome.Good : ThrowOutcome.Bad));
+        _turnThrows.Add(new DartThrowResult(dart.FormatName(), isHit ? ThrowOutcome.Good : ThrowOutcome.Bad));
 
         if (_turnThrows.Count >= 3)
             _turnJustCompleted = true;
@@ -46,11 +46,4 @@ public sealed class RoundTheBoardSingleFields : ITrainingMode
         else
             _currentTargetNumber++;
     }
-
-    private static string FormatName(DartThrow dart) => dart.Multiplier switch
-    {
-        2 => $"D{dart.Number}",
-        3 => $"T{dart.Number}",
-        _ => dart.Number.ToString()
-    };
 }

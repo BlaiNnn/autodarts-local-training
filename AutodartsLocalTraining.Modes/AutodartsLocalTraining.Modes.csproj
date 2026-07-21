@@ -16,5 +16,5 @@
   <ItemGroup>
     <ProjectReference Include="..\AutodartsLocalTraining.Core\AutodartsLocalTraining.Core.csproj" />
   </ItemGroup>
-
+  
 </Project>
