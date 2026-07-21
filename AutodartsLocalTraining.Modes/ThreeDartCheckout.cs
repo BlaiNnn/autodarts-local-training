@@ -34,7 +34,11 @@ public sealed class ThreeDartCheckout : ITrainingMode
 
         if (isBust)
         {
-            _turnThrows.Add(new DartThrowResult(FormatName(dart), ThrowOutcome.Bad));
+            // Three Dart Checkout: ThrowOutcome.Bad here always means the leg was
+            // busted (went negative, hit exactly 1, or reached 0 without a double) -
+            // show "Busted" instead of the actual segment, which would be confusing
+            // (e.g. showing "S1" for a throw that busted a leftover of 1).
+            _turnThrows.Add(new DartThrowResult("Busted", ThrowOutcome.Bad));
             _turnJustCompleted = true;
             return true;
         }
@@ -43,13 +47,13 @@ public sealed class ThreeDartCheckout : ITrainingMode
         {
             Score += _turnThrows.Count == 1 ? 2 : 1;
             _leftover = 0;
-            _turnThrows.Add(new DartThrowResult(FormatName(dart), ThrowOutcome.Good));
+            _turnThrows.Add(new DartThrowResult(dart.FormatName(), ThrowOutcome.Good));
             _turnJustCompleted = true;
             return true;
         }
 
         _leftover = remaining;
-        _turnThrows.Add(new DartThrowResult(FormatName(dart), ThrowOutcome.Neutral));
+        _turnThrows.Add(new DartThrowResult(dart.FormatName(), ThrowOutcome.Neutral));
 
         if (_turnThrows.Count >= 3)
             _turnJustCompleted = true;
@@ -74,11 +78,4 @@ public sealed class ThreeDartCheckout : ITrainingMode
             _leftover = _currentTarget;
         }
     }
-
-    private static string FormatName(DartThrow dart) => dart.Multiplier switch
-    {
-        2 => $"D{dart.Number}",
-        3 => $"T{dart.Number}",
-        _ => dart.Number.ToString()
-    };
 }

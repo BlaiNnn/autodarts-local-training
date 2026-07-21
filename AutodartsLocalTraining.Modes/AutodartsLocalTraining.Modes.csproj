@@ -17,4 +17,8 @@
     <ProjectReference Include="..\AutodartsLocalTraining.Core\AutodartsLocalTraining.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="obj\DartThrowFormatting.cs" />
+  </ItemGroup>
+
 </Project>
