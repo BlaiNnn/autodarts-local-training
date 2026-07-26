@@ -145,4 +145,7 @@
   <data name="Result_TrendEqual" xml:space="preserve">
     <value>= average {0:F1}</value>
   </data>
+  <data name="ThirtythreeDartsOnTwenty" xml:space="preserve">
+    <value>33 Darts on 20</value>
+  </data>
 </root>

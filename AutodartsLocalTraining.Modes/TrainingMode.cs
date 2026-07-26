@@ -6,5 +6,6 @@ namespace AutodartsLocalTraining.Modes;
 public enum TrainingMode
 {
     RoundTheBoardSingleFields,
-    ThreeDartCheckout
+    ThreeDartCheckout,
+    ThirtythreeDartsOnTwenty,
 }

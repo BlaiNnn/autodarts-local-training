@@ -6,6 +6,7 @@ public static class TrainingModeFactory
     {
         TrainingMode.RoundTheBoardSingleFields => new RoundTheBoardSingleFields(),
         TrainingMode.ThreeDartCheckout => new ThreeDartCheckout(),
+        TrainingMode.ThirtythreeDartsOnTwenty => new ThirtythreeDartsOnTwenty(),
         _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, "Unknown training mode.")
     };
 }

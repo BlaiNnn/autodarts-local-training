@@ -4,6 +4,7 @@ Train your darts skills with training plans using Autodarts.io in your local env
 ## TODO
 - Feature: More modes as listed below
 - Feature: nicer & scaling UI
+- Feature: Show turn number on every mode 
 - Feature: German translation
 - Feature: Make statistics available for user with Charts
 - Feature: Add multi user option?
@@ -32,10 +33,6 @@ Train your darts skills with training plans using Autodarts.io in your local env
 - Round the Board Single-Felder
   => 3 Darts pro Zahl / 1 Punkt pro Treffer
   => Einmal durchspielen 1-20
-
-
-- 33 Darts auf 20
-  => 1 Punkt pro Single (und Doppel) / 3 Punkte pro Triple
 
 - 33 Darts auf 19
   => 1 Punkt pro Single (und Doppel) / 3 Punkte pro Triple
