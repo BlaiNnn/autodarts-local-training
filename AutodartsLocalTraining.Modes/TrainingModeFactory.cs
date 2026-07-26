@@ -9,6 +9,9 @@ public static class TrainingModeFactory
         TrainingMode.ThirtythreeDartsOnTwenty => new ThirtythreeDartsOnTwenty(),
         TrainingMode.ThirtythreeDartsOnNineteen => new ThirtythreeDartsOnNineteen(),
         TrainingMode.ThirtythreeDartsOnBull => new ThirtythreeDartsOnBull(),
+        TrainingMode.FiftyoneDartsOnTwenty => new FiftyoneDartsOnTwenty(),
+        TrainingMode.FiftyoneDartsOnNineteen => new FiftyoneDartsOnNineteen(),
+        TrainingMode.FiftyoneDartsOnEightteen => new FiftyoneDartsOnEighteen(),
         _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, "Unknown training mode.")
     };
 }

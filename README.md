@@ -19,6 +19,7 @@ Train your darts skills with training plans using Autodarts.io in your local env
 - Refactor: move autodarts status handling to core project
 - Refactor: remove enum "TrainingMode", list implementations that inherit ITrainingMode instead
 - Refactor: rename project folder to match project names
+- Refactor: group similar modes with customization options
 
 
 ## missing modes for letsplaydarts-trainingplans
@@ -46,15 +47,6 @@ Train your darts skills with training plans using Autodarts.io in your local env
   81 82 83 84 85 86 87 88 89 90
   91 92 93 94 95 96 97 98 99 100
   => (max. 6 Darts: 2 Darts = 3 Punkte / 3 Darts = 2 Punkte / 4-6 Darts = 1 Punkt)
-
-- 51 Darts auf 20
-  => 1 Punkt pro Single (und Doppel) / 3 Punkte pro Triple
-
-- 51 Darts auf 19
-  => 1 Punkt pro Single (und Doppel) / 3 Punkte pro Triple
-
-- 51 Darts auf 18
-  => 1 Punkt pro Single (und Doppel) / 3 Punkte pro Triple
 
 - Shanghai
   => 3 Darts je Ziel: Single = 1 Punkt / Double = 2 Punkte / Triple = 3 Punkte
