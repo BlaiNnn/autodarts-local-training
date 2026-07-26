@@ -10,4 +10,7 @@ public enum TrainingMode
     ThirtythreeDartsOnTwenty,
     ThirtythreeDartsOnNineteen,
     ThirtythreeDartsOnBull,
+    FiftyoneDartsOnTwenty,
+    FiftyoneDartsOnNineteen,
+    FiftyoneDartsOnEighteen,
 }
