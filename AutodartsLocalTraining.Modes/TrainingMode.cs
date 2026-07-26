@@ -8,4 +8,5 @@ public enum TrainingMode
     RoundTheBoardSingleFields,
     ThreeDartCheckout,
     ThirtythreeDartsOnTwenty,
+    ThirtythreeDartsOnNineteen,
 }

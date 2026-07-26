@@ -34,9 +34,6 @@ Train your darts skills with training plans using Autodarts.io in your local env
   => 3 Darts pro Zahl / 1 Punkt pro Treffer
   => Einmal durchspielen 1-20
 
-- 33 Darts auf 19
-  => 1 Punkt pro Single (und Doppel) / 3 Punkte pro Triple
-
 - 33 Darts auf Bull
   => 1 Punkt pro Single / 2 Punkte pro DBull
 
