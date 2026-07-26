@@ -13,6 +13,7 @@ Train your darts skills with training plans using Autodarts.io in your local env
 - GitHub: Add release pipeline
 - GitHub: Add branch protection
 - Bugfix: Don't always start Ui in full-screen mode
+- Bugfix: Show target 25 as "Bull" 
 - Refactor: add extension methods for throw formatting
 => Perhaps this has been taken care of with PR6. If not, please describe the issue.
 - Refactor: move autodarts status handling to core project
@@ -29,13 +30,6 @@ Train your darts skills with training plans using Autodarts.io in your local env
   => 3 x 3 Darts auf D16, D8, D4
   => 3 x 3 Darts auf D12, D6, D3
   => Gespielt wird jeweils der erste Dart auf's erste Doppel, der zweite auf 's zweite Doppel und der dritte auf's dritte Doppel
-
-- Round the Board Single-Felder
-  => 3 Darts pro Zahl / 1 Punkt pro Treffer
-  => Einmal durchspielen 1-20
-
-- 33 Darts auf Bull
-  => 1 Punkt pro Single / 2 Punkte pro DBull
 
 - 3-Darts-Checkouts
   => 40 Checkouts zwischen 3 und 61

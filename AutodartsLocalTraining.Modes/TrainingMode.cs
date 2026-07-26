@@ -9,4 +9,5 @@ public enum TrainingMode
     ThreeDartCheckout,
     ThirtythreeDartsOnTwenty,
     ThirtythreeDartsOnNineteen,
+    ThirtythreeDartsOnBull,
 }

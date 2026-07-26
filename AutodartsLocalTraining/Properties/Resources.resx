@@ -151,4 +151,7 @@
   <data name="ThirtythreeDartsOnNineteen" xml:space="preserve">
     <value>33 Darts on 19</value>
   </data>
+  <data name="ThirtythreeDartsOnBull" xml:space="preserve">
+    <value>33 Darts on Bull</value>
+  </data>
 </root>
