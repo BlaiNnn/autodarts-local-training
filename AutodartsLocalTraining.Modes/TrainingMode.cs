@@ -14,4 +14,5 @@ public enum TrainingMode
     FiftyoneDartsOnNineteen,
     FiftyoneDartsOnEighteen,
     Shanghai,
+    RoundTheBoardDoubleFields,
 }
