@@ -166,4 +166,7 @@
   <data name="Shanghai" xml:space="preserve">
     <value>Shanghai</value>
   </data>
+  <data name="RoundTheBoardDoubleFields" xml:space="preserve">
+    <value>Round the Board (Double)</value>
+  </data>
 </root>
