@@ -48,18 +48,9 @@ Train your darts skills with training plans using Autodarts.io in your local env
   91 92 93 94 95 96 97 98 99 100
   => (max. 6 Darts: 2 Darts = 3 Punkte / 3 Darts = 2 Punkte / 4-6 Darts = 1 Punkt)
 
-- Shanghai
-  => 3 Darts je Ziel: Single = 1 Punkt / Double = 2 Punkte / Triple = 3 Punkte
-  => Einmal durchspielen 1-20
-
 - Cricket-Scoring
   => 3 Darts je Ziel: Single = 1 Punkt / Double = 2 Punkte / Triple = 3 Punkte / maximal 9 Punkte pro Ziel erreichbar
   => 15 16 17 18 19 20 Bull
-
-- Bob's 27
-  => je 3 Darts auf alle Doppelfelder / Start bei 27 Punkten / je getroffenes Doppel wird der Wert
-  addiert und bei keinem Treffer wird der Wert des Doppel abgezogen
-  => Einmal durchspielen 1-20-Bull
 
 - Doppel-Routine
   => 10 x 3 Darts auf die Doppel / 1 Punkt je Treffer
@@ -67,10 +58,6 @@ Train your darts skills with training plans using Autodarts.io in your local env
   ==> D20 / D10 / D5
   ==> D16 / D8 / D4
   ==> D12 / D6 / D3
-
-- Round the Board - Doppelfelder
-  => 3 Darts pro Zahl / 1 Punkt pro Treffer
-  => Einmal durchspielen 1-20 (Bull?)
 
 - 300 Darts Highscore
   => so viele Punkte wie möglich
