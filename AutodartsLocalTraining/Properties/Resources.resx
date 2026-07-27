@@ -163,4 +163,7 @@
   <data name="FiftyoneDartsOnEighteen" xml:space="preserve">
     <value>51 Darts on 18</value>
   </data>
+  <data name="Shanghai" xml:space="preserve">
+    <value>Shanghai</value>
+  </data>
 </root>
