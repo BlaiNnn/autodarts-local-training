@@ -13,4 +13,5 @@ public enum TrainingMode
     FiftyoneDartsOnTwenty,
     FiftyoneDartsOnNineteen,
     FiftyoneDartsOnEighteen,
+    Shanghai,
 }
