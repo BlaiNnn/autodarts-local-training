@@ -169,4 +169,7 @@
   <data name="RoundTheBoardDoubleFields" xml:space="preserve">
     <value>Round the Board (Double)</value>
   </data>
+  <data name="BobsTwentyseven" xml:space="preserve">
+    <value>Bob's 27</value>
+  </data>
 </root>
