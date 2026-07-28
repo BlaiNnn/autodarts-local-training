@@ -16,4 +16,5 @@ public enum TrainingMode
     Shanghai,
     RoundTheBoardDoubleFields,
     BobsTwentyseven,
+    DoubleRoutine,
 }
