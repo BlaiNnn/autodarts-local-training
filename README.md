@@ -52,13 +52,6 @@ Train your darts skills with training plans using Autodarts.io in your local env
   => 3 Darts je Ziel: Single = 1 Punkt / Double = 2 Punkte / Triple = 3 Punkte / maximal 9 Punkte pro Ziel erreichbar
   => 15 16 17 18 19 20 Bull
 
-- Doppel-Routine
-  => 10 x 3 Darts auf die Doppel / 1 Punkt je Treffer
-  => Gespielt wird jeweils der erste Dart auf's erste Doppel, der zweite auf 's zweite Doppel und der dritte auf's dritte Doppel
-  ==> D20 / D10 / D5
-  ==> D16 / D8 / D4
-  ==> D12 / D6 / D3
-
 - 300 Darts Highscore
   => so viele Punkte wie möglich
   => Summe 300 Darts / 100 = Punkte

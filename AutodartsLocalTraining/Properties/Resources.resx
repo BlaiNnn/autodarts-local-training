@@ -172,4 +172,7 @@
   <data name="BobsTwentyseven" xml:space="preserve">
     <value>Bob's 27</value>
   </data>
+  <data name="DoubleRoutine" xml:space="preserve">
+    <value>Double Routine</value>
+  </data>
 </root>
