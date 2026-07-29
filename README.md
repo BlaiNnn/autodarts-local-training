@@ -32,14 +32,6 @@ Train your darts skills with training plans using Autodarts.io in your local env
   => 3 x 3 Darts auf D12, D6, D3
   => Gespielt wird jeweils der erste Dart auf's erste Doppel, der zweite auf 's zweite Doppel und der dritte auf's dritte Doppel
 
-- 3-Darts-Checkouts
-  => 40 Checkouts zwischen 3 und 61
-  3 5 7 9 11 13 15 17 19 21
-  23 25 27 29 31 33 35 37 39 41
-  42 43 44 45 46 47 48 49 50 51
-  52 53 54 55 56 57 58 59 60 61
-  => 3 Darts = 1 Punkt / 2 Darts = 2 Punkte
-
 - Catch 40
   => 40 Checkouts zwischen 61 und 100
   61 62 63 64 65 66 67 68 69 70
