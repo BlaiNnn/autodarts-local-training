@@ -62,18 +62,3 @@ Train your darts skills with training plans using Autodarts.io in your local env
   => 25 Runden
   => Checkout-Zahl nach 25 Runden gleich Ergebniss
 
-- 3-Dart-Checkouts (20)
-  => 1 Punkt pro Checkout
-  40 60 68 72 76 80 84 88 90 92
-  96 98 100 108 112 116 120 140 160 170
-
-- 3-Dart-Checkouts (19)
-  => 1 Punkt pro Checkout
-  38 59 69 73 79 89 93 99 107 119
-  126 129 133 134 137 139 149 154 157 167
-
-- 3-Dart-Checkouts (18)
-  => 1 Punkt pro Checkout
-  36 58 62 66 68 70 74 78 86 90
-  94 102 104 108 118 122 134 144 154 164
-

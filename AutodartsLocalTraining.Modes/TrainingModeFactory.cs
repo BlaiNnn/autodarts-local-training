@@ -16,6 +16,9 @@ public static class TrainingModeFactory
         TrainingMode.RoundTheBoardDoubleFields => new RoundTheBoardDoubleFields(),
         TrainingMode.BobsTwentyseven => new BobsTwentyseven(),
         TrainingMode.DoubleRoutine => new DoubleRoutine(),
+        TrainingMode.ThreeDartCheckoutTwenty => new ThreeDartCheckoutTwenty(),
+        TrainingMode.ThreeDartCheckoutNineteen => new ThreeDartCheckoutNineteen(),
+        TrainingMode.ThreeDartCheckoutEighteen => new ThreeDartCheckoutEighteen(),
         _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, "Unknown training mode.")
     };
 }

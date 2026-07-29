@@ -17,4 +17,7 @@ public enum TrainingMode
     RoundTheBoardDoubleFields,
     BobsTwentyseven,
     DoubleRoutine,
+    ThreeDartCheckoutTwenty,
+    ThreeDartCheckoutNineteen,
+    ThreeDartCheckoutEighteen,
 }
