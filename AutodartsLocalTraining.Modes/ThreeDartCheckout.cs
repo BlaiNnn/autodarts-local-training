@@ -2,15 +2,12 @@ namespace AutodartsLocalTraining.Modes;
 
 public sealed class ThreeDartCheckout : ITrainingMode
 {
-    private const int FirstTarget = 3;
-    private const int LastTarget = 41;
-    private const int Step = 2;
-    private const int TargetCount = (LastTarget - FirstTarget) / Step + 1;
-
+    
     private readonly List<DartThrowResult> _turnThrows = new();
-    private int _currentTarget = FirstTarget;
-    private int _leftover = FirstTarget;
+    private static readonly int[] Targets = { 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61 };
+    private int _leftover = Targets[0];
     private bool _turnJustCompleted;
+    private int _turnCount = 1;
 
     public string PrimaryDisplayValue => _leftover.ToString();
 
@@ -18,7 +15,7 @@ public sealed class ThreeDartCheckout : ITrainingMode
 
     public int Score { get; private set; }
 
-    public int MaxScore => TargetCount * 2;
+    public int MaxScore => Targets.Length * 2;
 
     public bool IsComplete { get; private set; }
 
@@ -67,15 +64,15 @@ public sealed class ThreeDartCheckout : ITrainingMode
 
         _turnThrows.Clear();
         _turnJustCompleted = false;
+        _turnCount++;
 
-        if (_currentTarget >= LastTarget)
+        if (_turnCount == (Targets.Length + 1))
         {
             IsComplete = true;
         }
         else
         {
-            _currentTarget += Step;
-            _leftover = _currentTarget;
+            _leftover = Targets[_turnCount - 1];
         }
     }
 }
