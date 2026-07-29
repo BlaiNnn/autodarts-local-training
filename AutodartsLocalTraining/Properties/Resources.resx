@@ -175,4 +175,13 @@
   <data name="DoubleRoutine" xml:space="preserve">
     <value>Double Routine</value>
   </data>
+  <data name="ThreeDartCheckoutTwenty" xml:space="preserve">
+    <value>Three Dart Checkout (20)</value>
+  </data>
+  <data name="ThreeDartCheckoutNineteen" xml:space="preserve">
+    <value>Three Dart Checkout (19)</value>
+  </data>
+  <data name="ThreeDartCheckoutEighteen" xml:space="preserve">
+    <value>Three Dart Checkout (18)</value>
+  </data>
 </root>
