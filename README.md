@@ -13,7 +13,8 @@ Train your darts skills with training plans using Autodarts.io in your local env
 - GitHub: Add release pipeline
 - GitHub: Add branch protection
 - Bugfix: Don't always start Ui in full-screen mode
-- Bugfix: Show target 25 as "Bull" 
+- Bugfix: Show target 25 as "Bull"
+- Bugfix: Add Bonus in mode Shanghai 
 - Refactor: add extension methods for throw formatting
 => Perhaps this has been taken care of with PR6. If not, please describe the issue.
 - Refactor: move autodarts status handling to core project
@@ -43,10 +44,6 @@ Train your darts skills with training plans using Autodarts.io in your local env
 - Cricket-Scoring
   => 3 Darts je Ziel: Single = 1 Punkt / Double = 2 Punkte / Triple = 3 Punkte / maximal 9 Punkte pro Ziel erreichbar
   => 15 16 17 18 19 20 Bull
-
-- 300 Darts Highscore
-  => so viele Punkte wie möglich
-  => Summe 300 Darts / 100 = Punkte
 
 - 120 Checkout
   => 9 Darts zum Checken / Start bei 120 Punkten / plus 10 Punkte bei gelungenem

@@ -184,4 +184,7 @@
   <data name="ThreeDartCheckoutEighteen" xml:space="preserve">
     <value>Three Dart Checkout (18)</value>
   </data>
+  <data name="ThreehundredDartsHighscore" xml:space="preserve">
+    <value>300 Darts Highscore</value>
+  </data>
 </root>
