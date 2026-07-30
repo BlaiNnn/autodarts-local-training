@@ -11,7 +11,7 @@ public class ThreeDartCheckoutTests
 
         mode.PrimaryDisplayValue.Should().Be("3");
         mode.Score.Should().Be(0);
-        mode.MaxScore.Should().Be(40);
+        mode.MaxScore.Should().Be(80);
         mode.IsComplete.Should().BeFalse();
     }
 
@@ -142,12 +142,12 @@ public class ThreeDartCheckoutTests
     }
 
     [Fact]
-    public void FullRun_AlwaysBusting_CompletesAfter20TargetsWithZeroScore()
+    public void FullRun_AlwaysBusting_CompletesAfter40TargetsWithZeroScore()
     {
         var mode = new ThreeDartCheckout();
         var turnsPlayed = 0;
 
-        for (var target = 3; target <= 41; target += 2)
+        for (var i = 0; i < 40; i++)
         {
             mode.IsComplete.Should().BeFalse();
             var turnCompleted = mode.ProcessThrow(new DartThrow(20, 3)); // T20 = 60, always exceeds any target here -> bust
@@ -156,7 +156,7 @@ public class ThreeDartCheckoutTests
             turnsPlayed++;
         }
 
-        turnsPlayed.Should().Be(20);
+        turnsPlayed.Should().Be(40);
         mode.IsComplete.Should().BeTrue();
         mode.Score.Should().Be(0);
     }
