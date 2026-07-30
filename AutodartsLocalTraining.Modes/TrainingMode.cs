@@ -20,4 +20,5 @@ public enum TrainingMode
     ThreeDartCheckoutTwenty,
     ThreeDartCheckoutNineteen,
     ThreeDartCheckoutEighteen,
+    ThreehundredDartsHighscore,
 }
