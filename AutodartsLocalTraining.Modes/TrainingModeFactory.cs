@@ -20,6 +20,7 @@ public static class TrainingModeFactory
         TrainingMode.ThreeDartCheckoutNineteen => new ThreeDartCheckoutNineteen(),
         TrainingMode.ThreeDartCheckoutEighteen => new ThreeDartCheckoutEighteen(),
         TrainingMode.ThreehundredDartsHighscore => new ThreehundredDartsHighscore(),
+        TrainingMode.CricketScoring => new CricketScoring(),
         _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, "Unknown training mode.")
     };
 }

@@ -187,4 +187,7 @@
   <data name="ThreehundredDartsHighscore" xml:space="preserve">
     <value>300 Darts Highscore</value>
   </data>
+  <data name="CricketScoring" xml:space="preserve">
+    <value>Cricket Scoring</value>
+  </data>
 </root>
