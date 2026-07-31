@@ -41,10 +41,6 @@ Train your darts skills with training plans using Autodarts.io in your local env
   91 92 93 94 95 96 97 98 99 100
   => (max. 6 Darts: 2 Darts = 3 Punkte / 3 Darts = 2 Punkte / 4-6 Darts = 1 Punkt)
 
-- Cricket-Scoring
-  => 3 Darts je Ziel: Single = 1 Punkt / Double = 2 Punkte / Triple = 3 Punkte / maximal 9 Punkte pro Ziel erreichbar
-  => 15 16 17 18 19 20 Bull
-
 - 120 Checkout
   => 9 Darts zum Checken / Start bei 120 Punkten / plus 10 Punkte bei gelungenem
   Check / minus 1 Punkt bei verpasstem Check
