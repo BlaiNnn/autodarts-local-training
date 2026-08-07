@@ -190,4 +190,7 @@
   <data name="CricketScoring" xml:space="preserve">
     <value>Cricket Scoring</value>
   </data>
+  <data name="CatchForty" xml:space="preserve">
+    <value>CatchForty</value>
+  </data>
 </root>
