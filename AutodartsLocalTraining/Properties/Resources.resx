@@ -196,4 +196,7 @@
   <data name="WarmupRoutine" xml:space="preserve">
     <value>Warmup Routine</value>
   </data>
+  <data name="OneHundredTwentyCheckout" xml:space="preserve">
+    <value>120 Checkout</value>
+  </data>
 </root>

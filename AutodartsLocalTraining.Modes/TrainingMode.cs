@@ -24,4 +24,5 @@ public enum TrainingMode
     CricketScoring,
     CatchForty,
     WarmupRoutine,
+    OneHundredTwentyCheckout,
 }
