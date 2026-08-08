@@ -24,15 +24,6 @@ Train your darts skills with training plans using Autodarts.io in your local env
 
 
 ## missing modes for letsplaydarts-trainingplans
-- Aufwärmroutine
-  => Nur Anzeigen was gespielt werden soll
-  => Keine Aufzeichnung, keine Wertung
-  => 3 x 3 Darts auf BullsEye
-  => 3 x 3 Darts auf D20, D10, D5
-  => 3 x 3 Darts auf D16, D8, D4
-  => 3 x 3 Darts auf D12, D6, D3
-  => Gespielt wird jeweils der erste Dart auf's erste Doppel, der zweite auf 's zweite Doppel und der dritte auf's dritte Doppel
-
 - 120 Checkout
   => 9 Darts zum Checken / Start bei 120 Punkten / plus 10 Punkte bei gelungenem
   Check / minus 1 Punkt bei verpasstem Check

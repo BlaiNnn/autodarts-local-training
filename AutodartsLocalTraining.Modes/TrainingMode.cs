@@ -23,4 +23,5 @@ public enum TrainingMode
     ThreehundredDartsHighscore,
     CricketScoring,
     CatchForty,
+    WarmupRoutine,
 }

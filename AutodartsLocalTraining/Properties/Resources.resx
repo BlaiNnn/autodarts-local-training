@@ -191,6 +191,9 @@
     <value>Cricket Scoring</value>
   </data>
   <data name="CatchForty" xml:space="preserve">
-    <value>CatchForty</value>
+    <value>Catch 40</value>
+  </data>
+  <data name="WarmupRoutine" xml:space="preserve">
+    <value>Warmup Routine</value>
   </data>
 </root>

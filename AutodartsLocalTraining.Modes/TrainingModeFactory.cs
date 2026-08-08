@@ -22,6 +22,7 @@ public static class TrainingModeFactory
         TrainingMode.ThreehundredDartsHighscore => new ThreehundredDartsHighscore(),
         TrainingMode.CricketScoring => new CricketScoring(),
         TrainingMode.CatchForty => new CatchForty(),
+        TrainingMode.WarmupRoutine => new WarmupRoutine(),
         _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, "Unknown training mode.")
     };
 }
