@@ -2,7 +2,7 @@
 Train your darts skills with training plans using Autodarts.io in your local environment
 
 ## TODO
-- Feature: More modes as listed below
+- Feature: Squences for letsplaydarts traigingplans
 - Feature: nicer & scaling UI
 - Feature: Show turn number on every mode 
 - Feature: German translation
@@ -13,8 +13,7 @@ Train your darts skills with training plans using Autodarts.io in your local env
 - GitHub: Add release pipeline
 - GitHub: Add branch protection
 - Bugfix: Don't always start Ui in full-screen mode
-- Bugfix: Show target 25 as "Bull"
-- Bugfix: Add Bonus in mode Shanghai 
+- Bugfix: Show target 25 as "Bull" 
 - Refactor: add extension methods for throw formatting
 => Perhaps this has been taken care of with PR6. If not, please describe the issue.
 - Refactor: move autodarts status handling to core project
@@ -23,10 +22,5 @@ Train your darts skills with training plans using Autodarts.io in your local env
 - Refactor: group similar modes with customization options
 
 
-## missing modes for letsplaydarts-trainingplans
-- 120 Checkout
-  => 9 Darts zum Checken / Start bei 120 Punkten / plus 10 Punkte bei gelungenem
-  Check / minus 1 Punkt bei verpasstem Check
-  => 25 Runden
-  => Checkout-Zahl nach 25 Runden gleich Ergebniss
+
 
